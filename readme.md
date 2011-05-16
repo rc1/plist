@@ -1,28 +1,31 @@
-# Force Download #
+# Plist #
 
-When this event is attached to a page, it enables the page to force a download. The download can be triggered by adding the parameter `file` to the URL:
+Plist Extension for [Symphony-CMS](http://symphony-cms.com/). 
 
-	<a href="/download/?file=workspace/uploads/manual.pdf">Download manual</a>
+Converts the rendered output to a CFPropertyList (.plist) Format. The plist can either be created as an XML plist or Binary plist. The conversion can be triggered appending a GET var of `plist` to the URL of any frontend page.
 
-## Security ##
+## Example Usage ##
 
-To prevent that anyone can download any file from your website you have to set which folders are allowed for visitors to download files of. Otherwise evil people can download your config-settings for example simply by changing the URL in the browser bar to: `/download/?file=manifest/config.php`.
+Convert page to a XML Plist:
 
-To do this, you need to edit the file `event.force_download.config.php`:
+     http://examples.com/myPage/?plist
 
-	$allowedDirs = array(
-	  'workspace/uploads',
-	  'workspace/uploads/manuals',
-	  'workspace/uploads/images',
-	  
-	  ...etc...
-	  
-	);
+Convert page to a Binary Plist:
 
-Please note that each dir should be mentioned individualy, so a wildcard like `workspace/uploads/*` will not work.
+     http://examples.com/myPage/?plist=binary
+     
+## Tips ##
 
-## Download the current page ##
+### Creating Downloadable Links ###
 
-You can also download the page itself, by adding the parameter `download` to the URL. The value of this parameter will be the name of the file. For example:
+The Plist extension can be combined with Giel Berkers' [Force Download Extension](http://symphony-cms.com/download/extensions/view/49268/) to create downloadable links to the plist files through a web browser.
 
-	<a href="/sheet/?download=sheet.xml">Download sheet in XML-format</a>
+For example, if a Force Download event is added to the page `myPage` the plist could be downloaded from:
+
+    
+	http://examples.com/myPage/?plist=binary&download=myPage.plist
+	
+	
+    
+     
+     
